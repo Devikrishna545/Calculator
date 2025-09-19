@@ -1,27 +1,28 @@
-def add(a,b):
-    return a+b
+class Calculator:
 
-def sub(a,b):
-    if a<b:
-        return -(b-a)
-    else:
-        return a-b
+    def add(self,a,b):
+        return a+b
 
-def mul(a,b):
-    return a*b
+    def sub(a,b):
+        if a<b:
+            return -(b-a)
+        else:
+            return a-b
 
-def div(a,b):
-    return a/b if b!=0 else print("zero division error")
-    
-def sqrt(a):
-    import math
-    return math.sqrt(a)
-    
-def perct(a):
-    x=int(input("enter the percentage"))
-    output=(a*x)/100
-    return output
+    def mul(a,b):
+        return a*b
 
+    def div(a,b):
+        return a/b if b!=0 else print("zero division error")
+        
+    def sqrt(a):
+        import math
+        return math.sqrt(a)
+        
+    def perct(a):
+        x=int(input("enter the percentage"))
+        output=(a*x)/100
+        return output
 
 if __name__== '__main__':
     #empty array    
@@ -47,10 +48,10 @@ if __name__== '__main__':
                 for nums in range(1,num): 
                     z = input("enter the numbers:")
                     if z.isdigit():                                               
-                       arr.append(int(z))
-                       print(arr)
-                       continue
-                       
+                        arr.append(int(z))
+                        print(arr)
+                    continue
+                    
                 if len(arr) == num:
                     y = input("Enter =")                    
                     if y =='=':
@@ -73,7 +74,7 @@ if __name__== '__main__':
                                 mul *=items
                             c= mul 
                         elif op =='/':
-                            for items n arr:
+                            for items in arr:
                                 div /= items if items!=0 else print("zero division error")   
                         else:
                             print("Not Valid Operations")
@@ -82,14 +83,14 @@ if __name__== '__main__':
                                             
             elif num==2:
                     b=int(input("enter any number: "))
-                   
+                
                     c=0
                     #if + comes the numbers has to added
                     #if - comes the numbers has to subtracted
                     #if * comes the numbers has to multiplied
                     #if / comes the numbers has to divided
                     if op =='+':
-                        c=add(a,b)
+                        c=Calculator.add(a,b)
                     elif op =='-':
                         c=sub(a,b)
                     elif(op =='*'):
