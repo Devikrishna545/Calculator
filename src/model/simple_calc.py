@@ -6,7 +6,7 @@ class SimpleCalculator:
     def add(self,a,b):
         return a+b
 
-    def sub(a,b):
+    def sub(self,a,b):
         if a<b:
             return -(b-a)
         else:

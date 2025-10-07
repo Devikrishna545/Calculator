@@ -1,5 +1,6 @@
 import tkinter as tk
-
+import model.special_calc as special_calc
+import model.simple_calc as simple_calc
 
 root = tk.Tk()
 root.title("Calculator")
@@ -22,9 +23,40 @@ buttons = [
 for (text, row, col) in buttons:
     button = tk.Button(root, text=text, font=("Arial", 18), padx=20, pady=20)
     button.grid(row=row, column=col, sticky="nsew", padx=2, pady=2)
+    button.config(command=lambda t=text: display_var.set(display_var.get() + t) if display_var.get() != "0" else display_var.set(t) if t not in ["C", "M+", "M-", "+", "-", "*", "/"] else update_onButtonClick(t))
     
 # Bind commands to buttons (e.g., update_display or calculate)
+def update_onButtonClick(value): 
+    mem = 0
+    current = display_var.get()
+    if not current.isdigit():
+        if current == "C":
+            display_var.set("0")            
+        elif current =="M+":
+            result= special_calc.mem_add(mem,float(current))
+            
+        elif current =="M-":
+            result= special_calc.mem_sub(mem,float(current))
+            
+        elif current == "+":
+            result= simple_calc.add(mem,float(current))
+           
+        elif current == "-":
+            result= simple_calc.sub(mem,float(current))
+            
+        elif current == "/":
+            result= simple_calc.div(mem,float(current))
+            
+        elif current == "*":
+            result= simple_calc.mul(mem,float(current))
+        display_var.set(result)
+    else:
+        mem = float(current)
 
 
-root.mainloop()
+def run():
+    root.mainloop()
+
+if __name__ == "__main__":
+    run()
 
