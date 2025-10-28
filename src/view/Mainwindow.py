@@ -20,12 +20,31 @@ first_num = 0
 operation=None
 mem = 0
 
+button_styles = {
+    "number": {
+        "bg": "#F0F0F0", "fg": "black", "font": ("Arial", 18),
+        "activebackground": "#DCDCDC", "activeforeground": "black"
+    },
+    "operator": {
+        "bg": "#FFA500", "fg": "white", "font": ("Arial", 18),
+        "activebackground": "#FF8C00", "activeforeground": "white"
+    },
+    "special": {
+        "bg": "#D3D3D3", "fg": "black", "font": ("Arial", 18),
+        "activebackground": "#C0C0C0", "activeforeground": "black"
+    },
+    "equals": {
+        "bg": "#4CAF50", "fg": "white", "font": ("Arial", 18),
+        "activebackground": "#45a049", "activeforeground": "white"
+    }
+}
+
 buttons = [
-    ("7", 1, 0), ("8", 1, 1), ("9", 1, 2), ("/", 1, 3),
-    ("4", 2, 0), ("5", 2, 1), ("6", 2, 2), ("*", 2, 3),
-    ("1", 3, 0), ("2", 3, 1), ("3", 3, 2), ("-", 3, 3),
-    ("0", 4, 0), (".", 4, 1), ("=", 4, 2), ("+", 4, 3),
-    ("C", 5, 0), ("M+", 5, 1), ("M-", 5, 2)  # Clear button
+    ("7", 1, 0, "number"), ("8", 1, 1, "number"), ("9", 1, 2, "number"), ("/", 1, 3, "operator"),
+    ("4", 2, 0, "number"), ("5", 2, 1, "number"), ("6", 2, 2, "number"), ("*", 2, 3, "operator"),
+    ("1", 3, 0, "number"), ("2", 3, 1, "number"), ("3", 3, 2, "number"), ("-", 3, 3, "operator"),
+    ("0", 4, 0, "number"), (".", 4, 1, "number"), ("=", 4, 2, "equals"), ("+", 4, 3, "operator"),
+    ("C", 5, 0, "special"), ("M+", 5, 1, "special"), ("M-", 5, 2, "special")  # Clear button
 ]
 
 # Bind commands to buttons (e.g., update_display or calculate)
@@ -68,10 +87,10 @@ def on_button_click(value):
     elif value == "M-":
         mem = special_calc.mem_sub(mem, float(current))
 
-for (text, row, col) in buttons:
-   button = tk.Button(root, text=text, font=("Arial", 18), padx=20, pady=20, command=lambda t=text: on_button_click(t))
-   button.grid(row=row, column=col, sticky="nsew", padx=2, pady=2)       
-
+for (text, row, col,btn_type) in buttons:
+   style = button_styles.get(btn_type, {}) # Get the style for the button type
+   button = tk.Button(root, text=text, **style,padx=20, pady=20, command=lambda t=text: on_button_click(t))
+   button.grid(row=row, column=col, sticky="nsew", padx=2, pady=2)
 
 def run():
     root.mainloop()
